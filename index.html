@@ -17,13 +17,21 @@
                     },
                     backgroundImage: {
                         'noise': "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMDMwMzA0Ii8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMzMzMiIG9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')"
+                    },
+                    animation: {
+                        'float': 'float 20s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translate(0, 0)' },
+                            '50%': { transform: 'translate(30px, 50px)' },
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Minimal custom CSS required for specific effects */
         .scanline {
             width: 100%;
             height: 100px;
@@ -46,6 +54,11 @@
             color: #6366f1;
         }
         @keyframes blink { 50% { opacity: 0; } }
+        
+        /* App Mockup Specific Styles */
+        .mockup-scroll::-webkit-scrollbar { width: 4px; }
+        .mockup-scroll::-webkit-scrollbar-track { background: transparent; }
+        .mockup-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-noise min-h-screen border-t-2 border-indigo-600">
@@ -75,8 +88,8 @@
             </div>
 
             <div class="flex flex-col sm:flex-row gap-4 mt-12">
-                <button onclick="document.getElementById('arch').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 bg-zinc-100 text-black font-mono text-sm font-bold uppercase tracking-wider hover:bg-white transition-colors">
-                    System Architecture
+                <button onclick="document.getElementById('product-demo').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 bg-zinc-100 text-black font-mono text-sm font-bold uppercase tracking-wider hover:bg-white transition-colors">
+                    View Interface
                 </button>
                 <div class="flex items-center gap-4 px-6 py-3 border border-zinc-800 bg-zinc-900/50">
                     <span class="font-mono text-xs text-zinc-500">VERSION</span>
@@ -127,6 +140,176 @@
                 </div>
             </div>
         </div>
+
+        <!-- PRODUCT INTERFACE MOCKUP SECTION -->
+        <section id="product-demo" class="lg:col-span-12 py-24 space-y-12">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-5xl font-display font-black text-zinc-100 mb-4">
+                    Zero-Friction Experience
+                </h2>
+                <p class="text-zinc-400 font-mono text-sm max-w-xl mx-auto">
+                    A native-feel application designed for rapid triage. <br>
+                    Complex logic wrapped in a beautiful, consumer-grade UI.
+                </p>
+            </div>
+
+            <!-- THE WINDOW -->
+            <div class="rounded-xl overflow-hidden border border-zinc-800 bg-[#f3f4f6] shadow-2xl max-w-6xl mx-auto relative group select-none ring-4 ring-zinc-900/50">
+                
+                <!-- WINDOW TITLE BAR (Mac Style) -->
+                <div class="h-10 bg-[#e5e7eb] border-b border-zinc-300 flex items-center px-4 gap-2">
+                    <div class="w-3 h-3 rounded-full bg-[#ef4444] border border-[#dc2626]"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#f59e0b] border border-[#d97706]"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#22c55e] border border-[#16a34a]"></div>
+                    <div class="ml-4 text-[11px] font-medium text-zinc-500 flex-1 text-center pr-12 font-sans flex items-center justify-center gap-2">
+                        <svg class="w-3 h-3 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        Deleetrr — Dashboard
+                    </div>
+                </div>
+
+                <!-- APP CONTENT (Recreated from App.jsx) -->
+                <div class="flex h-[600px] text-zinc-800 font-sans relative overflow-hidden">
+                    
+                    <!-- Background ORBS from your CSS -->
+                    <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0 opacity-50 bg-[#f3f4f6]">
+                        <div class="absolute top-[-10%] left-[-5%] w-[50vw] h-[50vw] bg-[#e0e7ff] rounded-full blur-[80px] opacity-60 animate-float"></div>
+                        <div class="absolute bottom-[-10%] right-[-5%] w-[60vw] h-[60vw] bg-[#fae8ff] rounded-full blur-[80px] opacity-60 animate-float" style="animation-delay: -5s;"></div>
+                    </div>
+
+                    <!-- SIDEBAR -->
+                    <div class="w-60 bg-white/70 backdrop-blur-xl border-r border-white/60 p-4 flex flex-col z-10">
+                        <!-- Logo -->
+                        <div class="flex items-center gap-3 px-2 py-3 mb-6">
+                            <div class="w-8 h-8 flex items-center justify-center text-indigo-600 bg-white rounded-lg shadow-sm">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            </div>
+                            <div>
+                                <span class="font-bold text-base tracking-tight text-gray-800 block">DELETRR</span>
+                                <div class="flex items-center gap-1.5 mt-0.5"><div class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.6)]"></div><span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider">Online</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Nav Items -->
+                        <div class="space-y-1 flex-1">
+                            <div class="w-full flex justify-between items-center px-4 py-2.5 rounded-xl mb-1 bg-white text-indigo-600 font-bold shadow-sm cursor-default">
+                                <div class="flex items-center gap-3"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span class="text-xs">Dashboard</span></div>
+                                <span class="text-[9px] px-2 py-0.5 rounded-full font-bold bg-indigo-50 text-indigo-700">12</span>
+                            </div>
+                            <div class="w-full flex justify-between items-center px-4 py-2.5 rounded-xl mb-1 text-gray-500 hover:bg-white/50 transition">
+                                <div class="flex items-center gap-3"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg><span class="text-xs">Tracking</span></div>
+                            </div>
+                            <div class="w-full flex justify-between items-center px-4 py-2.5 rounded-xl mb-1 text-gray-500 hover:bg-white/50 transition">
+                                <div class="flex items-center gap-3"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg><span class="text-xs">Brokers</span></div>
+                            </div>
+                            <div class="w-full flex justify-between items-center px-4 py-2.5 rounded-xl mb-1 text-gray-500 hover:bg-white/50 transition">
+                                <div class="flex items-center gap-3"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span class="text-xs">Settings</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Account Snippet -->
+                        <div class="mt-auto pt-6 border-t border-gray-100">
+                            <div class="px-2.5 py-2 rounded-lg flex items-center gap-2 bg-indigo-50 border border-indigo-100">
+                                <div class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold bg-indigo-600 text-white">J</div>
+                                <div class="text-xs truncate flex-1 font-medium text-indigo-900">john.doe@gmail.com</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MAIN AREA -->
+                    <div class="flex-1 p-8 overflow-hidden z-10 flex flex-col">
+                        
+                        <!-- Header -->
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <h1 class="text-2xl font-extrabold text-gray-800 mb-1">Dashboard</h1>
+                                <p class="text-gray-500 text-xs">Manage your digital hygiene.</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-xl font-bold text-xs shadow-sm flex items-center gap-2">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg> Scan Inbox
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="flex gap-4 mb-8">
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4 flex-1">
+                                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-inner">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                                </div>
+                                <div>
+                                    <div class="text-xl font-extrabold text-gray-900 leading-none mb-1">12,450</div>
+                                    <div class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Total Emails</div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4 flex-1">
+                                <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shadow-inner">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                </div>
+                                <div>
+                                    <div class="text-xl font-extrabold text-gray-900 leading-none mb-1">842</div>
+                                    <div class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Processed</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filter Tabs -->
+                        <div class="flex gap-2 mb-4">
+                            <span class="px-4 py-1.5 rounded-full text-[10px] font-bold bg-gray-800 text-white border border-gray-800 shadow-md">All <span class="ml-1 opacity-70 text-gray-300">12</span></span>
+                            <span class="px-4 py-1.5 rounded-full text-[10px] font-bold bg-white text-gray-500 border border-gray-200">Cleanup <span class="ml-1 opacity-70 text-gray-400">8</span></span>
+                            <span class="px-4 py-1.5 rounded-full text-[10px] font-bold bg-white text-gray-500 border border-gray-200">GDPR <span class="ml-1 opacity-70 text-gray-400">2</span></span>
+                        </div>
+
+                        <!-- Fake Table (Static) -->
+                        <div class="bg-white/50 backdrop-blur-sm rounded-xl border border-gray-200 overflow-hidden mockup-scroll flex-1 overflow-y-auto">
+                            <!-- Header -->
+                            <div class="grid grid-cols-12 gap-2 p-3 border-b border-gray-200 text-[9px] font-bold text-gray-400 uppercase tracking-wider bg-white/50">
+                                <div class="col-span-1"></div>
+                                <div class="col-span-3">Sender</div>
+                                <div class="col-span-4">Subject</div>
+                                <div class="col-span-2 text-center">Trust</div>
+                                <div class="col-span-2 text-right">Action</div>
+                            </div>
+
+                            <!-- Row 1: Spam -->
+                            <div class="grid grid-cols-12 gap-2 p-3 items-center border-b border-gray-100 hover:bg-white transition bg-white/40">
+                                <div class="col-span-1 flex justify-center"><div class="w-6 h-6 rounded bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-[10px]">T</div></div>
+                                <div class="col-span-3 text-xs font-bold text-gray-800">Temu Offers</div>
+                                <div class="col-span-4 text-xs text-gray-500 truncate">Exclusive: 90% OFF on all Tech items...</div>
+                                <div class="col-span-2 flex justify-center"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold border text-red-600 bg-red-50 border-red-200">12</span></div>
+                                <div class="col-span-2 flex justify-end"><span class="px-2 py-0.5 rounded text-[9px] font-bold border uppercase tracking-wider text-red-600 bg-red-50 border-red-200">DELETE</span></div>
+                            </div>
+
+                            <!-- Row 2: GDPR -->
+                            <div class="grid grid-cols-12 gap-2 p-3 items-center border-b border-gray-100 hover:bg-white transition bg-white/40">
+                                <div class="col-span-1 flex justify-center"><div class="w-6 h-6 rounded bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-[10px]">L</div></div>
+                                <div class="col-span-3 text-xs font-bold text-gray-800">LinkedIn</div>
+                                <div class="col-span-4 text-xs text-gray-500 truncate">You appeared in 4 searches this week</div>
+                                <div class="col-span-2 flex justify-center"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold border text-yellow-600 bg-yellow-50 border-yellow-200">45</span></div>
+                                <div class="col-span-2 flex justify-end"><span class="px-2 py-0.5 rounded text-[9px] font-bold border uppercase tracking-wider text-purple-600 bg-purple-50 border-purple-200">GDPR</span></div>
+                            </div>
+
+                            <!-- Row 3: Safe -->
+                            <div class="grid grid-cols-12 gap-2 p-3 items-center border-b border-gray-100 hover:bg-white transition bg-white/40">
+                                <div class="col-span-1 flex justify-center"><div class="w-6 h-6 rounded bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-[10px]">S</div></div>
+                                <div class="col-span-3 text-xs font-bold text-gray-800">Stripe</div>
+                                <div class="col-span-4 text-xs text-gray-500 truncate">Invoice #99281-220 for $120.00 USD</div>
+                                <div class="col-span-2 flex justify-center"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold border text-green-600 bg-green-50 border-green-200">98</span></div>
+                                <div class="col-span-2 flex justify-end"><span class="px-2 py-0.5 rounded text-[9px] font-bold border uppercase tracking-wider text-green-600 bg-green-50 border-green-200">KEEP</span></div>
+                            </div>
+                             <!-- Row 4: Spam -->
+                             <div class="grid grid-cols-12 gap-2 p-3 items-center border-b border-gray-100 hover:bg-white transition bg-white/40">
+                                <div class="col-span-1 flex justify-center"><div class="w-6 h-6 rounded bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-[10px]">F</div></div>
+                                <div class="col-span-3 text-xs font-bold text-gray-800">Facebook</div>
+                                <div class="col-span-4 text-xs text-gray-500 truncate">Reminder: You have 3 notifications pending</div>
+                                <div class="col-span-2 flex justify-center"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold border text-red-600 bg-red-50 border-red-200">20</span></div>
+                                <div class="col-span-2 flex justify-end"><span class="px-2 py-0.5 rounded text-[9px] font-bold border uppercase tracking-wider text-red-600 bg-red-50 border-red-200">DELETE</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- ARCHITECTURE (Asymmetric Grid) -->
         <section id="arch" class="lg:col-span-12 pt-12 pb-24">
