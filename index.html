@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DELETRR | The World's Only Execution Engine</title>
-    <!-- Tailwind CSS -->
+    <title>DELETRR | Sovereign Identity & Execution Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font: Inter & Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Montserrat:wght@800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --brand-primary: #6366f1;
+            --brand-danger: #ef4444;
             --bg-dark: #020617;
             --card-bg: #0f172a;
             --border-subtle: rgba(255, 255, 255, 0.08);
+            --terminal-green: #00ff41;
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -23,7 +23,17 @@
             overflow-x: hidden;
         }
         h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
-        
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* CRT / Scanline Effect from Promo.html */
+        .crt-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none; z-index: 100;
+        }
+
         .premium-card {
             background: var(--card-bg);
             border: 1px solid var(--border-subtle);
@@ -41,98 +51,84 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .stat-value {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 4rem;
-            line-height: 1;
-            letter-spacing: -0.05em;
+        /* Iceberg Visualization from Promo.html */
+        .iceberg-container {
+            position: relative; height: 350px; width: 100%;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .water-line {
+            position: absolute; top: 30%; left: 0; width: 100%; height: 1px;
+            background: var(--brand-primary); box-shadow: 0 0 10px var(--brand-primary);
+        }
+        .iceberg-top {
+            position: absolute; top: 5%; width: 0; height: 0; 
+            border-left: 50px solid transparent; border-right: 50px solid transparent;
+            border-bottom: 70px solid white; opacity: 0.9;
+        }
+        .iceberg-bottom {
+            position: absolute; top: 30%; width: 0; height: 0; 
+            border-left: 120px solid transparent; border-right: 100px solid transparent;
+            border-top: 180px solid rgba(99, 102, 241, 0.2);
         }
 
-        /* Feature Matrix Styles */
-        .badge-exclusive {
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: #818cf8;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        /* Terminal Styles from Promo.html */
+        .terminal-box {
+            background: #000; border: 1px solid var(--border-subtle);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.1);
         }
 
-        /* Operational Loop Styles */
         .loop-node {
-            padding: 1.5rem 2rem;
-            border-radius: 1rem;
+            padding: 1.5rem 2rem; border-radius: 1rem;
             border: 1px solid var(--border-subtle);
-            background: rgba(255, 255, 255, 0.03);
-            text-align: center;
-            font-weight: 700;
-            font-size: 1rem;
-            flex: 1;
-            min-width: 200px;
+            background: rgba(255, 255, 255, 0.03); text-align: center;
+            font-weight: 700; flex: 1; min-width: 200px;
         }
-        .loop-arrow {
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--brand-primary), transparent);
-            width: 40px;
-        }
-        
+
         .cyber-grid {
-            background-image: linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(34, 211, 238, 0.02) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(34, 211, 238, 0.02) 1px, transparent 1px);
             background-size: 50px 50px;
         }
     </style>
-    <!-- 
-        TECHNICAL SUMMARY:
-        - All Canvas/JS charts removed as requested to focus on core messaging.
-        - Institutional layout maintained with CSS-only diagrams.
-        - ZERO SVG, ZERO Mermaid JS.
-    -->
 </head>
 <body class="antialiased cyber-grid">
+    <div class="crt-overlay"></div>
+    
+    <!-- CANVAS BG (Threat Map) -->
+    <canvas id="threatMap" class="fixed inset-0 z-0 opacity-20 pointer-events-none"></canvas>
 
     <!-- EXECUTIVE HEADER -->
-    <header class="py-24 border-b border-white/5 relative overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute top-[-20%] left-[10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]"></div>
-        </div>
-        <div class="container mx-auto px-6 relative z-10 text-center md:text-left">
+    <header class="py-24 border-b border-white/5 relative overflow-hidden z-10">
+        <div class="container mx-auto px-6 text-center md:text-left">
             <div class="max-w-5xl">
                 <div class="inline-flex items-center gap-2 mb-8 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-400/20 text-indigo-400 text-[11px] font-bold uppercase tracking-[0.2em]">
-                    Institutional-Grade Privacy Infrastructure
+                    Institutional-Grade Sovereignty
                 </div>
-                <h1 class="text-7xl md:text-9xl font-black mb-8 leading-[0.9] tracking-tighter italic">
+                <h1 class="text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter italic">
                     DELE<span class="text-indigo-500">T</span>TR
                 </h1>
-                <p class="text-3xl md:text-5xl text-slate-400 font-light leading-snug mb-10">
-                    Traditional tools discover data. <br>
-                    <span class="text-white font-bold underline decoration-indigo-500">DELETRR is the only engine that executes its eradication.</span>
+                <p class="text-3xl md:text-5xl text-slate-400 font-light leading-tight mb-10">
+                    The State was hacked. You are next. <br>
+                    <span class="text-white font-bold underline decoration-indigo-500">DELETRR is the only engine that executes your eradication.</span>
                 </p>
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
                     <div class="premium-card px-8 py-4 flex items-center gap-3">
                         <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
                         <span class="text-xs font-bold uppercase tracking-widest text-slate-300">Local-First Actuator</span>
                     </div>
-                    <div class="premium-card px-8 py-4 flex items-center gap-3 border-white/20">
-                        <span class="w-2 h-2 rounded-full bg-white"></span>
-                        <span class="text-xs font-bold uppercase tracking-widest text-white">Execution Monopoly</span>
-                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 py-20 space-y-32">
+    <main class="container mx-auto px-6 py-20 space-y-32 relative z-10">
 
-        <!-- SECTION 1: THE CAPABILITY GAP -->
+        <!-- THE ACTION GAP SECTION -->
         <section class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 highlight-text uppercase italic">The Action Gap</h2>
-                <p class="text-slate-400 text-xl leading-relaxed">
-                    Privacy tools like <em>SayMine</em> or <em>Mine</em> are "Observer Tools". They find data but leave the manual burden to the user. DELETRR is a technical actuator.
+                <p class="text-slate-400 text-xl">
+                    Passive tools find data traces. DELETRR is the only technical actuator that carries out the legal destruction locally.
                 </p>
             </div>
             
@@ -140,116 +136,78 @@
                 <div class="p-8 premium-card bg-indigo-500/10 border-indigo-500/40 border-2">
                     <div class="text-indigo-400 font-black text-4xl mb-4 italic">ACTIVATE</div>
                     <h3 class="text-xl font-bold text-white mb-4 uppercase">DELETRR Engine</h3>
-                    <ul class="space-y-4 text-slate-300">
-                        <li class="flex items-center gap-3 font-semibold text-emerald-400">● Local AI Identification (Llama3)</li>
-                        <li class="flex items-center gap-3 font-semibold text-emerald-400">● Automated DPO Target ID</li>
-                        <li class="flex items-center gap-3 font-semibold text-emerald-400">● Autonomous Art. 17 Execution</li>
-                        <li class="flex items-center gap-3 font-semibold text-emerald-400">● Smart Archival Before Purge</li>
+                    <ul class="space-y-4 text-slate-300 text-sm mono">
+                        <li class="flex items-center gap-3 text-emerald-400">● Local AI Intelligence (Llama3)</li>
+                        <li class="flex items-center gap-3 text-emerald-400">● Automated DPO Target ID</li>
+                        <li class="flex items-center gap-3 text-emerald-400">● Autonomous Art. 17 Execution</li>
+                        <li class="flex items-center gap-3 text-emerald-400">● Smart Archival Before Purge</li>
                     </ul>
                 </div>
-                <div class="p-8 premium-card opacity-30">
-                    <div class="text-slate-600 font-black text-4xl mb-4 italic">OBSERVE</div>
-                    <h3 class="text-xl font-bold mb-4 uppercase">Legacy Platforms</h3>
-                    <ul class="space-y-4 text-slate-500">
-                        <li class="flex items-center gap-3">○ Manual Email Templates</li>
-                        <li class="flex items-center gap-3">○ Cloud Discovery (New Risk)</li>
-                        <li class="flex items-center gap-3">○ Zero Execution Power</li>
-                        <li class="flex items-center gap-3">○ No Data Preservation</li>
-                    </ul>
+                <!-- THE TERMINAL DAEMON ANIMATION -->
+                <div class="premium-card terminal-box overflow-hidden flex flex-col">
+                    <div class="w-full bg-gray-900 px-4 py-2 flex gap-2 border-b border-white/5">
+                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                        <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                        <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                        <span class="text-[9px] text-gray-500 ml-2 mono uppercase">deletrr_daemon — 80x24</span>
+                    </div>
+                    <div id="terminal-content" class="p-4 mono text-[11px] text-emerald-500 h-48 overflow-y-hidden leading-relaxed">
+                        <!-- JS injected content -->
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: EXCLUSIVE MONOPOLY -->
+        <!-- THE ICEBERG SECTION -->
+        <section class="max-w-4xl mx-auto text-center space-y-12">
+            <h2 class="text-4xl font-bold highlight-text uppercase italic">The Shadow Web Problem</h2>
+            <p class="text-slate-400 text-lg">
+                You only see 10% of the entities holding your data. DELETRR maps and targets the 868+ shadow brokers hiding beneath the surface.
+            </p>
+            <div class="iceberg-container">
+                <div class="water-line"></div>
+                <div class="iceberg-top"></div>
+                <div class="absolute top-[15%] text-[10px] font-bold uppercase tracking-widest text-white">Visible Apps (Uber, Amazon)</div>
+                <div class="iceberg-bottom"></div>
+                <div class="absolute top-[60%] text-xs font-black uppercase tracking-widest text-indigo-400">
+                    Shadow Brokers (868+ Detected) <br>
+                    <span class="text-[10px] text-slate-500 font-normal">Acxiom, Epsilon, Criteo, Experian...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE MONOPOLY MATRIX -->
         <section class="space-y-16">
             <div class="text-center max-w-4xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 highlight-text uppercase italic">The Monopoly Matrix</h2>
-                <p class="text-slate-400 text-xl leading-relaxed">
-                    DELETRR owns the entire lifecycle of data sovereignty. Competitors cannot follow due to their dependency on cloud-based AI APIs.
-                </p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 highlight-text uppercase italic">Exclusive Capabilities</h2>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
                 <div class="premium-card p-10 flex flex-col items-center text-center">
                     <div class="text-5xl mb-6">🧠</div>
-                    <h4 class="text-white font-bold text-xl mb-4">Local LLM Logic</h4>
-                    <p class="text-sm text-slate-500 leading-relaxed mb-8">Llama3 processing happens on the user's device. Sensitive content never leaves the network.</p>
-                    <span class="badge-exclusive">EXCLUSIVE</span>
+                    <h4 class="text-white font-bold text-xl mb-4">Local Llama3</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">Sensitive content never leaves the user's hardware. Total Privacy by Design.</p>
                 </div>
-                <!-- Feature 2 -->
                 <div class="premium-card p-10 flex flex-col items-center text-center border-indigo-500/40">
                     <div class="text-5xl mb-6">⚖️</div>
-                    <h4 class="text-white font-bold text-xl mb-4">Art. 12.2 Counter-Strike</h4>
-                    <p class="text-sm text-slate-500 leading-relaxed mb-8">AI detects corporate stalling (demanding IDs, fake forms) and auto-replies with legal mandates.</p>
-                    <span class="badge-exclusive">EXCLUSIVE</span>
+                    <h4 class="text-white font-bold text-xl mb-4">Art. 12.2 Defense</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">AI detects corporate stalling and auto-strikes with legal mandates.</p>
                 </div>
-                <!-- Feature 3 -->
                 <div class="premium-card p-10 flex flex-col items-center text-center">
                     <div class="text-5xl mb-6">📦</div>
-                    <h4 class="text-white font-bold text-xl mb-4">Art. 20 Smart Vault</h4>
-                    <p class="text-sm text-slate-500 leading-relaxed mb-8">Automatically rescues contracts and invoices to Google Drive before the final account wipe.</p>
-                    <span class="badge-exclusive">EXCLUSIVE</span>
+                    <h4 class="text-white font-bold text-xl mb-4">Smart Vault</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">Reclaims invoices and contracts to Drive *before* finalized deletion.</p>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: THE ERADICATION LOOP -->
-        <section class="premium-card p-12 bg-white/[0.01]">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-4 highlight-text uppercase italic">The Sovereignty Protocol</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto text-lg italic">Closing the loop on data liability.</p>
-            </div>
-            
-            <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 max-w-6xl mx-auto">
-                <div class="loop-node border-indigo-500/30 text-indigo-300">
-                    01. Local Ingest
-                    <div class="text-[10px] font-normal text-slate-500 mt-2 uppercase tracking-widest">IMAP / SMTP / API</div>
-                </div>
-                <div class="flex items-center justify-center lg:loop-arrow h-12 lg:h-0.5">
-                    <div class="w-0.5 lg:w-full h-full lg:h-0.5 bg-indigo-500/20"></div>
-                </div>
-                <div class="loop-node bg-white/5">
-                    02. Intent Filtering
-                    <div class="text-[10px] font-normal text-slate-500 mt-2 uppercase tracking-widest">Local LLM Llama3:8b</div>
-                </div>
-                <div class="flex items-center justify-center lg:loop-arrow h-12 lg:h-0.5">
-                    <div class="w-0.5 lg:w-full h-full lg:h-0.5 bg-indigo-500/20"></div>
-                </div>
-                <div class="loop-node border-emerald-500/30 text-emerald-400">
-                    03. Data Recovery
-                    <div class="text-[10px] font-normal text-slate-500 mt-2 uppercase tracking-widest">Art. 20 / Smart Archival</div>
-                </div>
-                <div class="flex items-center justify-center lg:loop-arrow h-12 lg:h-0.5">
-                    <div class="w-0.5 lg:w-full h-full lg:h-0.5 bg-indigo-500/20"></div>
-                </div>
-                <div class="loop-node border-red-500/40 text-red-500">
-                    04. Account Purge
-                    <div class="text-[10px] font-normal text-slate-500 mt-2 uppercase tracking-widest">Art. 17 / Legal Deletion</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: LIQUIDITY OF LIABILITY -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                <div class="p-10 premium-card text-center bg-indigo-500/5">
-                    <div class="stat-value text-indigo-500">3.5x</div>
-                    <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mt-6">Compliance Velocity</p>
-                </div>
-                <div class="p-10 premium-card text-center bg-white/5">
-                    <div class="stat-value text-white">0%</div>
-                    <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mt-6">Server Egress</p>
-                </div>
-            </div>
-            <div>
-                <h2 class="text-4xl md:text-5xl font-bold mb-8 highlight-text uppercase italic leading-tight">Liquidation of Risk</h2>
-                <p class="text-slate-400 text-xl leading-relaxed mb-10">
-                    Data retention is not an asset; it is a massive liability. DELETRR is designed to liquidate this risk at scale. By automating the extraction and deletion cycle, we reduce the blast radius of a corporate breach to zero.
-                </p>
-                <div class="inline-block py-3 px-6 bg-white text-black font-black text-xs uppercase tracking-[0.2em] rounded">
-                    Operational Core v1.0
-                </div>
+        <!-- FINAL CTA -->
+        <section class="text-center py-20">
+            <h2 class="text-4xl font-black mb-8 highlight-text italic uppercase">Liquidation of Liability</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto mb-12">
+                Every record retained is a ticking bomb. DELETRR is the world's only unified engine for mass identity eradication.
+            </p>
+            <div class="inline-block py-4 px-10 bg-white text-black font-black text-sm uppercase tracking-widest rounded cursor-default hover:bg-indigo-500 hover:text-white transition-all">
+                Operational Core v1.0
             </div>
         </section>
 
@@ -259,5 +217,80 @@
         <p class="text-slate-600 text-[11px] font-bold uppercase tracking-[0.5em]">DELETRR | Sovereign Identity Engine</p>
     </footer>
 
+    <script>
+        /* TERMINAL ANIMATION */
+        const terminalContent = document.getElementById('terminal-content');
+        const logs = [
+            "> [SYSTEM] INITIALIZING GDPR PROTOCOL...",
+            "> [SCAN] TARGET: ACXIOM CORP (Data Broker)",
+            "> [AI] GENERATING FORMAL NOTICE (ART. 17)...",
+            "> [EMAIL] SENDING FROM USER_ENCRYPTED_NODE...",
+            "> [STATUS] ✅ SENT. LEGAL PROOF ARCHIVED.",
+            "> [SCAN] NEXT: ORACLE DATA CLOUD...",
+            "> [AI] IDENTIFYING DPO: privacy@oracle.com",
+            "> [ACTION] REQUESTING ARTICLE 20 PORTABILITY...",
+            "> [VAULT] SAVING INVOICE_2024.PDF TO DRIVE",
+            "> [PURGE] EXECUTING ACCOUNT ERADICATION...",
+            "> [DONE] NODE CLEANED SUCCESSFULLY."
+        ];
+        let i = 0;
+        function addLog() {
+            if (i >= logs.length) { i = 0; terminalContent.innerHTML = ''; }
+            const p = document.createElement('div');
+            p.innerText = logs[i];
+            p.style.opacity = '0';
+            p.style.transform = 'translateX(10px)';
+            p.style.transition = 'all 0.3s ease';
+            terminalContent.appendChild(p);
+            setTimeout(() => { p.style.opacity = '1'; p.style.transform = 'translateX(0)'; }, 50);
+            i++;
+            setTimeout(addLog, 1200 + Math.random() * 800);
+        }
+        addLog();
+
+        /* THREAT MAP ANIMATION */
+        const canvas = document.getElementById('threatMap');
+        const ctx = canvas.getContext('2d');
+        let width, height, points = [];
+        function resize() { 
+            width = canvas.width = window.innerWidth; 
+            height = canvas.height = window.innerHeight; 
+        }
+        class Point {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+        }
+        function init() {
+            resize();
+            points = Array.from({ length: 80 }, () => new Point());
+            animate();
+        }
+        function animate() {
+            ctx.clearRect(0,0,width,height);
+            ctx.strokeStyle = "rgba(99, 102, 241, 0.1)";
+            ctx.lineWidth = 0.5;
+            points.forEach(p => {
+                p.update();
+                points.forEach(p2 => {
+                    let d = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (d < 150) {
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                    }
+                });
+            });
+            requestAnimationFrame(animate);
+        }
+        window.onresize = resize;
+        init();
+    </script>
 </body>
 </html>
