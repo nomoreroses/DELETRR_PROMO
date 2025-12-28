@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELETRR | The World's Only Execution Engine</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font: Inter & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-primary: #6366f1;
+            --bg-dark: #020617;
+            --card-bg: #0f172a;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: #ececec;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+        
+        .premium-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        .premium-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .highlight-text {
+            background: linear-gradient(135deg, #fff 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-value {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 4rem;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        /* Feature Matrix Styles */
+        .badge-exclusive {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #818cf8;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Operational Loop Styles */
+        .loop-node {
+            padding: 1.5rem 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.03);
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 200px;
+        }
+        .loop-arrow {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--brand-primary), transparent);
+            width: 40px;
+        }
+        
+        .cyber-grid {
+            background-image: linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
+    <!-- 
+        TECHNICAL SUMMARY:
+        - All Canvas/JS charts removed as requested to focus on core messaging.
+        - Institutional layout maintained with CSS-only diagrams.
+        - ZERO SVG, ZERO Mermaid JS.
+    -->
+</head>
+<body class="antialiased cyber-grid">
+
+    <!-- EXECUTIVE HEADER -->
+    <header class="py-24 border-b border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-[-20%] left-[10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center md:text-left">
+            <div class="max-w-5xl">
+                <div class="inline-flex items-center gap-2 mb-8 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-400/20 text-indigo-400 text-[11px] font-bold uppercase tracking-[0.2em]">
+                    Institutional-Grade Privacy Infrastructure
+                </div>
+                <h1 class="text-7xl md:text-9xl font-black mb-8 leading-[0.9] tracking-tighter italic">
+                    DELE<span class="text-indigo-500">T</span>TR
+                </h1>
+                <p class="text-3xl md:text-5xl text-slate-400 font-light leading-snug mb-10">
+                    Traditional tools discover data. <br>
+                    <span class="text-white font-bold underline decoration-indigo-500">DELETRR is the only engine that executes its eradication.</span>
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <div class="premium-card px-8 py-4 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-300">Local-First Actuator</span>
+                    </div>
+                    <div class="premium-card px-8 py-4 flex items-center gap-3 border-white/20">
+                        <span class="w-2 h-2 rounded-full bg-white"></span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-white">Execution Monopoly</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-20 space-y-32">
+
+        <!-- SECTION 1: THE CAPABILITY GAP -->
+        <section class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 highlight-text uppercase italic">The Action Gap</h2>
+                <p class="text-slate-400 text-xl leading-relaxed">
+                    Privacy tools like <em>SayMine</em> or <em>Mine</em> are "Observer Tools". They find data but leave the manual burden to the user. DELETRR is a technical actuator.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-8 premium-card bg-indigo-500/10 border-indigo-500/40 border-2">
+                    <div class="text-indigo-400 font-black text-4xl mb-4 italic">ACTIVATE</div>
+                    <h3 class="text-xl font-bold text-white mb-4 uppercase">DELETRR Engine</h3>
+                    <ul class="space-y-4 text-slate-300">
+                        <li class="flex items-center gap-3 font-semibold text-emerald-400">● Local AI Identification (Llama3)</li>
+                        <li class="flex items-center gap-3 font-semibold text-emerald-400">● Automated DPO Target ID</li>
+                        <li class="flex items-center gap-3 font-semibold text-emerald-400">● Autonomous Art. 17 Execution</li>
+                        <li class="flex items-center gap-3 font-semibold text-emerald-400">● Smart Archival Before Purge</li>
+                    </ul>
+                </div>
+                <div class="p-8 premium-card opacity-30">
+                    <div class="text-slate-600 font-black text-4xl mb-4 italic">OBSERVE</div>
+                    <h3 class="text-xl font-bold mb-4 uppercase">Legacy Platforms</h3>
+                    <ul class="space-y-4 text-slate-500">
+                        <li class="flex items-center gap-3">○ Manual Email Templates</li>
+                        <li class="flex items-center gap-3">○ Cloud Discovery (New Risk)</li>
+                        <li class="flex items-center gap-3">○ Zero Execution Power</li>
+                        <li class="flex items-center gap-3">○ No Data Preservation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: EXCLUSIVE MONOPOLY -->
+        <section class="space-y-16">
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 highlight-text uppercase italic">The Monopoly Matrix</h2>
+                <p class="text-slate-400 text-xl leading-relaxed">
+                    DELETRR owns the entire lifecycle of data sovereignty. Competitors cannot follow due to their dependency on cloud-based AI APIs.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="premium-card p-10 flex flex-col items-center text-center">
+                    <div class="text-5xl mb-6">🧠</div>
+                    <h4 class="text-white font-bold text-xl mb-4">Local LLM Logic</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-8">Llama3 processing happens on the user's device. Sensitive content never leaves the network.</p>
+                    <span class="badge-exclusive">EXCLUSIVE</span>
+                </div>
+                <!-- Feature 2 -->
+                <div class="premium-card p-10 flex flex-col items-center text-center border-indigo-500/40">
+                    <div class="text-5xl mb-6">⚖️</div>
+                    <h4 class="text-white font-bold text-xl mb-4">Art. 12.2 Counter-Strike</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-8">AI detects corporate stalling (demanding IDs, fake forms) and auto-replies with legal mandates.</p>
+                    <span class="badge-exclusive">EXCLUSIVE</span>
+                </div>
+                <!-- Feature 3 -->
+                <div class="premium-card p-10 flex flex-col items-center text-center">
+                    <div class="text-5xl mb-6">📦</div>
+                    <h4 class="text-white font-bold text-xl mb-4">Art. 20 Smart Vault</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-8">Automatically rescues contracts and invoices to Google Drive before the final account wipe.</p>
+                    <span class="badge-exclusive">EXCLUSIVE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THE ERADICATION LOOP -->
+        <section class="premium-card p-12 bg-white/[0.01]">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 highlight-text uppercase italic">The Sovereignty Protocol</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto text-lg italic">Closing the loop on data liability.</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 max-w-6xl mx-auto">
+                <div class="loop-node border-indigo-500/30 text-indigo-300">
+                    01. Local Ingest
+                    <div class="text-[10px] font-normal text-slate-500 mt-2 uppercase tracking-widest">IMAP / SMTP / API</div>
+                </div>
+                <div class="flex items-center justify-center lg:loop-arrow h-12 lg:h-0.5">
+                    <div class="w-0.5 lg:w-full h-full lg:h-0.5 bg-indigo-500/20"></div>
+                </div>
+                <div class="loop-node bg-white/5">
+                    02. Intent Filtering
+                    <div class="text-[10px] font-normal text-slate-500 mt-2 uppercase tracking-widest">Local LLM Llama3:8b</div>
+                </div>
+                <div class="flex items-center justify-center lg:loop-arrow h-12 lg:h-0.5">
+                    <div class="w-0.5 lg:w-full h-full lg:h-0.5 bg-indigo-500/20"></div>
+                </div>
+                <div class="loop-node border-emerald-500/30 text-emerald-400">
+                    03. Data Recovery
+                    <div class="text-[10px] font-normal text-slate-500 mt-2 uppercase tracking-widest">Art. 20 / Smart Archival</div>
+                </div>
+                <div class="flex items-center justify-center lg:loop-arrow h-12 lg:h-0.5">
+                    <div class="w-0.5 lg:w-full h-full lg:h-0.5 bg-indigo-500/20"></div>
+                </div>
+                <div class="loop-node border-red-500/40 text-red-500">
+                    04. Account Purge
+                    <div class="text-[10px] font-normal text-slate-500 mt-2 uppercase tracking-widest">Art. 17 / Legal Deletion</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: LIQUIDITY OF LIABILITY -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                <div class="p-10 premium-card text-center bg-indigo-500/5">
+                    <div class="stat-value text-indigo-500">3.5x</div>
+                    <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mt-6">Compliance Velocity</p>
+                </div>
+                <div class="p-10 premium-card text-center bg-white/5">
+                    <div class="stat-value text-white">0%</div>
+                    <p class="text-[11px] font-black text-slate-400 uppercase tracking-widest mt-6">Server Egress</p>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-8 highlight-text uppercase italic leading-tight">Liquidation of Risk</h2>
+                <p class="text-slate-400 text-xl leading-relaxed mb-10">
+                    Data retention is not an asset; it is a massive liability. DELETRR is designed to liquidate this risk at scale. By automating the extraction and deletion cycle, we reduce the blast radius of a corporate breach to zero.
+                </p>
+                <div class="inline-block py-3 px-6 bg-white text-black font-black text-xs uppercase tracking-[0.2em] rounded">
+                    Operational Core v1.0
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-24 border-t border-white/5 text-center">
+        <p class="text-slate-600 text-[11px] font-bold uppercase tracking-[0.5em]">DELETRR | Sovereign Identity Engine</p>
+    </footer>
+
+</body>
+</html>
