@@ -85,6 +85,8 @@
             animation: blink 1s step-start infinite;
             color: #7C3AED;
             margin-left: 4px;
+            display: inline-block;
+            vertical-align: bottom;
         }
         @keyframes blink { 50% { opacity: 0; } }
 
@@ -438,6 +440,7 @@
     <!-- Simulator Script -->
     <script>
         const terminal = document.getElementById('terminal-content');
+        let activeTimeouts = []; // Track active simulation timeouts
 
         const scenarios = {
             spam: [
@@ -465,14 +468,17 @@
         };
 
         function runSim(type) {
+            // Clear any running timeouts from previous clicks
+            activeTimeouts.forEach(id => clearTimeout(id));
+            activeTimeouts = [];
+
             // Clear terminal
             terminal.innerHTML = '<div class="text-gray-500"># Initializing Protocol...</div>';
             
             const sequence = scenarios[type];
-            let totalDelay = 0;
 
             sequence.forEach(line => {
-                setTimeout(() => {
+                const timeoutId = setTimeout(() => {
                     const p = document.createElement('div');
                     p.className = `${line.color} font-mono cursor`;
                     p.innerText = line.text;
@@ -484,6 +490,7 @@
                     terminal.appendChild(p);
                     terminal.scrollTop = terminal.scrollHeight;
                 }, line.delay);
+                activeTimeouts.push(timeoutId);
             });
         }
     </script>
