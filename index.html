@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DELETRR | Sovereign Identity & Execution Engine</title>
+    <title>DELETRR | Professional Data Cleanup</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Montserrat:wght@800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
@@ -25,7 +25,7 @@
         h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
         .mono { font-family: 'JetBrains Mono', monospace; }
 
-        /* CRT / Scanline Effect from Promo.html */
+        /* CRT / Scanline Effect */
         .crt-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
@@ -51,37 +51,82 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Iceberg Visualization from Promo.html */
-        .iceberg-container {
-            position: relative; height: 350px; width: 100%;
-            display: flex; justify-content: center; align-items: center;
+        /* Iceberg Section */
+        .iceberg-wrapper {
+            position: relative;
+            height: 500px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 4rem 0;
         }
-        .water-line {
-            position: absolute; top: 30%; left: 0; width: 100%; height: 1px;
-            background: var(--brand-primary); box-shadow: 0 0 10px var(--brand-primary);
-        }
-        .iceberg-top {
-            position: absolute; top: 5%; width: 0; height: 0; 
-            border-left: 50px solid transparent; border-right: 50px solid transparent;
-            border-bottom: 70px solid white; opacity: 0.9;
-        }
-        .iceberg-bottom {
-            position: absolute; top: 30%; width: 0; height: 0; 
-            border-left: 120px solid transparent; border-right: 100px solid transparent;
-            border-top: 180px solid rgba(99, 102, 241, 0.2);
+        
+        .water-surface {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--brand-primary), transparent);
+            box-shadow: 0 0 20px var(--brand-primary);
+            z-index: 10;
         }
 
-        /* Terminal Styles from Promo.html */
+        .iceberg-top {
+            position: absolute;
+            bottom: 65%;
+            width: 160px;
+            height: 100px;
+            background: linear-gradient(180deg, #fff 0%, #cbd5e1 100%);
+            clip-path: polygon(50% 0%, 85% 100%, 15% 100%);
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+            z-index: 5;
+        }
+
+        .iceberg-bottom {
+            position: absolute;
+            top: 35%;
+            width: 400px;
+            height: 280px;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.4) 0%, rgba(30, 27, 75, 0.8) 100%);
+            clip-path: polygon(15% 0%, 85% 0%, 100% 40%, 80% 90%, 50% 100%, 20% 90%, 0% 40%);
+            z-index: 4;
+            backdrop-filter: blur(4px);
+            border-bottom: 2px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .abyssal-glow {
+            position: absolute;
+            top: 45%;
+            width: 500px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .label-visible {
+            position: absolute;
+            top: 15%;
+            right: calc(50% + 100px);
+            text-align: right;
+            border-right: 2px solid #fff;
+            padding-right: 1rem;
+        }
+
+        .label-shadow {
+            position: absolute;
+            top: 55%;
+            left: calc(50% + 220px);
+            text-align: left;
+            border-left: 2px solid var(--brand-primary);
+            padding-left: 1rem;
+        }
+
         .terminal-box {
             background: #000; border: 1px solid var(--border-subtle);
             box-shadow: 0 0 30px rgba(99, 102, 241, 0.1);
-        }
-
-        .loop-node {
-            padding: 1.5rem 2rem; border-radius: 1rem;
-            border: 1px solid var(--border-subtle);
-            background: rgba(255, 255, 255, 0.03); text-align: center;
-            font-weight: 700; flex: 1; min-width: 200px;
         }
 
         .cyber-grid {
@@ -102,19 +147,23 @@
         <div class="container mx-auto px-6 text-center md:text-left">
             <div class="max-w-5xl">
                 <div class="inline-flex items-center gap-2 mb-8 px-3 py-1 rounded-md bg-indigo-500/10 border border-indigo-400/20 text-indigo-400 text-[11px] font-bold uppercase tracking-[0.2em]">
-                    Institutional-Grade Sovereignty
+                    Pro-Level Data Privacy
                 </div>
-                <h1 class="text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter italic">
+                <h1 class="text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter italic uppercase">
                     DELE<span class="text-indigo-500">T</span>TR
                 </h1>
                 <p class="text-3xl md:text-5xl text-slate-400 font-light leading-tight mb-10">
-                    The State was hacked. You are next. <br>
-                    <span class="text-white font-bold underline decoration-indigo-500">DELETRR is the only engine that executes your eradication.</span>
+                   Your data is stolen online every day.<br>
+                    <span class="text-white font-bold underline decoration-indigo-500">The only tool that actually erases your data automatically.</span>
                 </p>
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
                     <div class="premium-card px-8 py-4 flex items-center gap-3">
                         <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                        <span class="text-xs font-bold uppercase tracking-widest text-slate-300">Local-First Actuator</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-slate-300">100% Private Tool</span>
+                    </div>
+                    <div class="premium-card px-8 py-4 flex items-center gap-3 border-white/20">
+                        <span class="w-2 h-2 rounded-full bg-white"></span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-white">Full Automated Cleanup</span>
                     </div>
                 </div>
             </div>
@@ -123,24 +172,25 @@
 
     <main class="container mx-auto px-6 py-20 space-y-32 relative z-10">
 
-        <!-- THE ACTION GAP SECTION -->
+        <!-- THE CLEANUP GAP SECTION -->
         <section class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 highlight-text uppercase italic">The Action Gap</h2>
-                <p class="text-slate-400 text-xl">
-                    Passive tools find data traces. DELETRR is the only technical actuator that carries out the legal destruction locally.
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 highlight-text uppercase italic">The Cleanup Gap</h2>
+                <p class="text-slate-400 text-xl leading-relaxed">
+                    Most privacy apps just show you a list of problems and let you do the work. <br><br>
+                    <strong>DELETRR does the job for you.</strong> We connect, we identify, and we erase everything locally on your machine.
                 </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="p-8 premium-card bg-indigo-500/10 border-indigo-500/40 border-2">
-                    <div class="text-indigo-400 font-black text-4xl mb-4 italic">ACTIVATE</div>
-                    <h3 class="text-xl font-bold text-white mb-4 uppercase">DELETRR Engine</h3>
+                    <div class="text-indigo-400 font-black text-4xl mb-4 italic">START</div>
+                    <h3 class="text-xl font-bold text-white mb-4 uppercase">DELETRR: One Click</h3>
                     <ul class="space-y-4 text-slate-300 text-sm mono">
-                        <li class="flex items-center gap-3 text-emerald-400">● Local AI Intelligence (Llama3)</li>
-                        <li class="flex items-center gap-3 text-emerald-400">● Automated DPO Target ID</li>
-                        <li class="flex items-center gap-3 text-emerald-400">● Autonomous Art. 17 Execution</li>
-                        <li class="flex items-center gap-3 text-emerald-400">● Smart Archival Before Purge</li>
+                        <li class="flex items-center gap-3 text-emerald-400 font-bold">● Local AI finds hidden trackers</li>
+                        <li class="flex items-center gap-3 text-emerald-400 font-bold">● Automatic legal requests sent</li>
+                        <li class="flex items-center gap-3 text-emerald-400 font-bold">● Full account deletion enforced</li>
+                        <li class="flex items-center gap-3 text-emerald-400 font-bold">● Safe backup of your invoices</li>
                     </ul>
                 </div>
                 <!-- THE TERMINAL DAEMON ANIMATION -->
@@ -158,80 +208,101 @@
             </div>
         </section>
 
-        <!-- THE ICEBERG SECTION -->
-        <section class="max-w-4xl mx-auto text-center space-y-12">
-            <h2 class="text-4xl font-bold highlight-text uppercase italic">The Shadow Web Problem</h2>
-            <p class="text-slate-400 text-lg">
-                You only see 10% of the entities holding your data. DELETRR maps and targets the 868+ shadow brokers hiding beneath the surface.
-            </p>
-            <div class="iceberg-container">
-                <div class="water-line"></div>
+        <!-- THE IMPROVED ICEBERG SECTION -->
+        <section class="max-w-6xl mx-auto text-center space-y-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold highlight-text uppercase italic">The Hidden Danger</h2>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    Deleting your Facebook account is just the tip of the iceberg. <br>
+                    The real problem is the <strong>868+ Shadow Brokers</strong> who trade your bank info and address behind your back.
+                </p>
+            </div>
+
+            <div class="iceberg-wrapper">
+                <div class="abyssal-glow"></div>
+                <div class="water-surface"></div>
+                
+                <!-- TOP LABEL -->
+                <div class="label-visible">
+                    <div class="text-white font-black text-sm uppercase tracking-[0.2em]">10% The Visible Part</div>
+                    <div class="text-slate-500 text-[11px] mt-1 italic">Amazon, Netflix, Facebook, Uber</div>
+                </div>
+
                 <div class="iceberg-top"></div>
-                <div class="absolute top-[15%] text-[10px] font-bold uppercase tracking-widest text-white">Visible Apps (Uber, Amazon)</div>
                 <div class="iceberg-bottom"></div>
-                <div class="absolute top-[60%] text-xs font-black uppercase tracking-widest text-indigo-400">
-                    Shadow Brokers (868+ Detected) <br>
-                    <span class="text-[10px] text-slate-500 font-normal">Acxiom, Epsilon, Criteo, Experian...</span>
+
+                <!-- BOTTOM LABEL -->
+                <div class="label-shadow">
+                    <div class="text-indigo-400 font-black text-xl uppercase tracking-[0.1em]">90% The Hidden Danger</div>
+                    <div class="text-slate-400 text-sm mt-1 font-bold">868+ Data Brokers Detected</div>
+                    <div class="text-slate-500 text-[11px] mt-2 mono uppercase leading-tight">
+                        Acxiom • Criteo • Experian • Oracle • Epsilon <br> 
+                        Equifax • CoreLogic • Nielsen • LiveRamp
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- THE MONOPOLY MATRIX -->
+        <!-- THE FEATURES MATRIX -->
         <section class="space-y-16">
             <div class="text-center max-w-4xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 highlight-text uppercase italic">Exclusive Capabilities</h2>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 highlight-text uppercase italic">Unique Features</h2>
+                <p class="text-slate-400 text-lg">
+                    DELETRR is the only tool built for real privacy. No other app works like this.
+                </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="premium-card p-10 flex flex-col items-center text-center">
                     <div class="text-5xl mb-6">🧠</div>
-                    <h4 class="text-white font-bold text-xl mb-4">Local Llama3</h4>
-                    <p class="text-sm text-slate-500 leading-relaxed">Sensitive content never leaves the user's hardware. Total Privacy by Design.</p>
+                    <h4 class="text-white font-bold text-xl mb-4">On-Device AI</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">Our AI runs on your machine. Your emails never travel to our servers. Your privacy is physically protected.</p>
                 </div>
-                <div class="premium-card p-10 flex flex-col items-center text-center border-indigo-500/40">
+                <div class="premium-card p-10 flex flex-col items-center text-center border-indigo-500/40 shadow-lg shadow-indigo-500/5">
                     <div class="text-5xl mb-6">⚖️</div>
-                    <h4 class="text-white font-bold text-xl mb-4">Art. 12.2 Defense</h4>
-                    <p class="text-sm text-slate-500 leading-relaxed">AI detects corporate stalling and auto-strikes with legal mandates.</p>
+                    <h4 class="text-white font-bold text-xl mb-4">Legal Power</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">Companies try to stall you with complex forms. Our tool detects this and auto-replies with legal mandates to force them to delete you.</p>
                 </div>
                 <div class="premium-card p-10 flex flex-col items-center text-center">
                     <div class="text-5xl mb-6">📦</div>
-                    <h4 class="text-white font-bold text-xl mb-4">Smart Vault</h4>
-                    <p class="text-sm text-slate-500 leading-relaxed">Reclaims invoices and contracts to Drive *before* finalized deletion.</p>
+                    <h4 class="text-white font-bold text-xl mb-4">Smart Backup</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">Don't be afraid to delete. DELETRR automatically saves your invoices and contracts to your Drive before wiping the accounts.</p>
                 </div>
             </div>
         </section>
 
         <!-- FINAL CTA -->
-        <section class="text-center py-20">
-            <h2 class="text-4xl font-black mb-8 highlight-text italic uppercase">Liquidation of Liability</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto mb-12">
-                Every record retained is a ticking bomb. DELETRR is the world's only unified engine for mass identity eradication.
+        <section class="text-center py-20 bg-indigo-500/5 rounded-[3rem] border border-indigo-500/10">
+            <h2 class="text-4xl md:text-6xl font-black mb-8 highlight-text italic uppercase leading-none">Stop the Risk</h2>
+            <p class="text-slate-400 max-w-3xl mx-auto mb-12 text-lg font-light leading-relaxed">
+                Every day you wait, your data is at risk of being stolen again. <br>
+                <strong>DELETRR is the only tool that takes full control of your cleanup.</strong>
             </p>
-            <div class="inline-block py-4 px-10 bg-white text-black font-black text-sm uppercase tracking-widest rounded cursor-default hover:bg-indigo-500 hover:text-white transition-all">
-                Operational Core v1.0
+            <div class="inline-block py-5 px-12 bg-white text-black font-black text-sm uppercase tracking-widest rounded shadow-2xl hover:shadow-indigo-500/20 transition-all cursor-default">
+                System Core v1.0
             </div>
         </section>
 
     </main>
 
     <footer class="py-24 border-t border-white/5 text-center">
-        <p class="text-slate-600 text-[11px] font-bold uppercase tracking-[0.5em]">DELETRR | Sovereign Identity Engine</p>
+        <p class="text-slate-600 text-[10px] font-bold uppercase tracking-[0.5em]">DELETRR | Professional Data Protection</p>
     </footer>
 
     <script>
         /* TERMINAL ANIMATION */
         const terminalContent = document.getElementById('terminal-content');
         const logs = [
-            "> [SYSTEM] INITIALIZING GDPR PROTOCOL...",
-            "> [SCAN] TARGET: ACXIOM CORP (Data Broker)",
-            "> [AI] GENERATING FORMAL NOTICE (ART. 17)...",
-            "> [EMAIL] SENDING FROM USER_ENCRYPTED_NODE...",
-            "> [STATUS] ✅ SENT. LEGAL PROOF ARCHIVED.",
+            "> [SYSTEM] STARTING CLEANUP PROTOCOL...",
+            "> [SCAN] FOUND: ACXIOM CORP (Shadow Broker)",
+            "> [AI] ANALYZING... ELIGIBLE FOR DELETION",
+            "> [ACTION] SENDING LEGAL REQUEST...",
+            "> [STATUS] ✅ SENT. PROOF SAVED.",
             "> [SCAN] NEXT: ORACLE DATA CLOUD...",
-            "> [AI] IDENTIFYING DPO: privacy@oracle.com",
-            "> [ACTION] REQUESTING ARTICLE 20 PORTABILITY...",
-            "> [VAULT] SAVING INVOICE_2024.PDF TO DRIVE",
-            "> [PURGE] EXECUTING ACCOUNT ERADICATION...",
-            "> [DONE] NODE CLEANED SUCCESSFULLY."
+            "> [AI] FINDING DPO CONTACT...",
+            "> [ACTION] ASKING FOR DATA BACKUP...",
+            "> [BACKUP] SAVING INVOICE_2024.PDF TO DRIVE",
+            "> [PURGE] WIPING ALL DATA PERMANENTLY...",
+            "> [DONE] ACCOUNT ERASED SUCCESSFULLY."
         ];
         let i = 0;
         function addLog() {
